@@ -1,3 +1,4 @@
+import type * as React from "react";
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 export type Role = "grower" | "buyer";
@@ -76,7 +77,9 @@ type ContextValue = State & {
   createOffer:(lotId:string,requirementId:string,quantity:number,price:number|undefined,note:string)=>void;
   sendMessage:(id:string,text:string)=>void; markRead:(id:string)=>void; updateProfile:(profile:Profile)=>void; reset:()=>void;
 };
-const MarketplaceContext = createContext<ContextValue | null>(null);
+// Keep one context instance across hot reloads so provider and pages never disconnect.
+const ctxStore = globalThis as unknown as { __kinnowCtx?: React.Context<ContextValue | null> };
+const MarketplaceContext = ctxStore.__kinnowCtx ?? (ctxStore.__kinnowCtx = createContext<ContextValue | null>(null));
 const STORAGE = "kinnowlink-demo-v3";
 const THEME = "kinnowlink-theme";
 
