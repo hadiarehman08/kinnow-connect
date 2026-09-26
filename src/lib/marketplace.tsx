@@ -77,7 +77,7 @@ type ContextValue = State & {
   sendMessage:(id:string,text:string)=>void; markRead:(id:string)=>void; updateProfile:(profile:Profile)=>void; reset:()=>void;
 };
 const MarketplaceContext = createContext<ContextValue | null>(null);
-const STORAGE = "kinnowlink-demo-v1";
+const STORAGE = "kinnowlink-demo-v3";
 const THEME = "kinnowlink-theme";
 
 export function MarketplaceProvider({children}:{children:ReactNode}) {
