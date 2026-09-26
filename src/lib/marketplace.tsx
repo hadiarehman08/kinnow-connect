@@ -65,14 +65,16 @@ const THEME = "kinnowlink-theme";
 export function MarketplaceProvider({children}:{children:ReactNode}) {
   const [state,setState] = useState<State>(initial);
   const [theme,setThemeState] = useState<Theme>("system");
-  useEffect(()=>{ try { const saved=localStorage.getItem(STORAGE); if(saved) setState(JSON.parse(saved)); const t=localStorage.getItem(THEME) as Theme|null; if(t) setThemeState(t); } catch {} },[]);
-  useEffect(()=>{ localStorage.setItem(STORAGE,JSON.stringify(state)); },[state]);
+  const [hydrated,setHydrated] = useState(false);
+  useEffect(()=>{ try { const saved=localStorage.getItem(STORAGE); if(saved) setState(JSON.parse(saved)); const t=localStorage.getItem(THEME) as Theme|null; if(t) setThemeState(t); } catch {} finally { setHydrated(true); } },[]);
+  useEffect(()=>{ if(hydrated) localStorage.setItem(STORAGE,JSON.stringify(state)); },[state,hydrated]);
   useEffect(()=>{
+    if(!hydrated) return;
     localStorage.setItem(THEME,theme);
     const query=window.matchMedia("(prefers-color-scheme: dark)");
     const apply=()=>document.documentElement.classList.toggle("dark",theme==="dark"||(theme==="system"&&query.matches));
     apply(); query.addEventListener("change",apply); return()=>query.removeEventListener("change",apply);
-  },[theme]);
+  },[theme,hydrated]);
   const value=useMemo<ContextValue>(()=>({...state,theme,setTheme:setThemeState,
     setRole:(role)=>setState(s=>({...s,role})),
     addLot:(lot)=>setState(s=>({...s,lots:[{...lot,id:`lot-${Date.now()}`,grower:s.profile.business,status:"Active",updated:"Just now"},...s.lots]})),
