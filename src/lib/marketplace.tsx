@@ -6,17 +6,17 @@ export type Status = "Draft" | "Active" | "Paused" | "Closed";
 
 export type Lot = {
   id: string; variety: string; quantity: number; unit: string; grade: string;
-  location: string; date: string; price?: number; description: string; grower: string;
+  location: string; date: string; price: number | undefined; description: string; grower: string;
   status: Status; updated: string;
 };
 export type Requirement = {
   id: string; variety: string; quantity: number; unit: string; grade: string;
-  location: string; date: string; price?: number; description: string; buyer: string;
+  location: string; date: string; price: number | undefined; description: string; buyer: string;
   status: Status; updated: string;
 };
 export type Offer = {
   id: string; lotId: string; requirementId: string; senderRole: Role; party: string;
-  quantity: number; price?: number; note: string; status: "Pending" | "Accepted" | "Declined" | "Countered" | "Withdrawn"; date: string;
+  quantity: number; price: number | undefined; note: string; status: "Pending" | "Accepted" | "Declined" | "Countered" | "Withdrawn"; date: string;
 };
 export type Conversation = { id: string; party: string; context: string; unread: boolean; messages: { id: string; mine: boolean; text: string; time: string }[] };
 type Profile = { name: string; business: string; location: string; phone: string; email: string };
@@ -94,7 +94,8 @@ export function matchReasons(lot:Lot,req:Requirement){
   if(lot.variety.toLowerCase()!==req.variety.toLowerCase()||lot.status!=="Active"||req.status!=="Active") return [];
   const reasons=[`${lot.variety} variety matches`];
   reasons.push(lot.quantity>=req.quantity?`Full ${req.quantity} ${req.unit} quantity fit`:`Partial fit: ${lot.quantity} of ${req.quantity} ${req.unit}`);
-  reasons.push(lot.grade.includes(req.grade.split(" ")[0])?`Requested ${req.grade} grade aligns`:`Grade needs confirmation (${lot.grade} vs ${req.grade})`);
+  const requestedGrade=req.grade.split(" ")[0] ?? req.grade;
+  reasons.push(lot.grade.includes(requestedGrade)?`Requested ${req.grade} grade aligns`:`Grade needs confirmation (${lot.grade} vs ${req.grade})`);
   reasons.push(lot.date<=req.date?"Ready before the needed-by date":"Timing needs discussion");
   reasons.push(lot.location.split(",").at(-1)===req.location.split(",").at(-1)?"Both locations are in Punjab":"Transport feasibility needs confirmation");
   if(lot.price&&req.price) reasons.push(lot.price<=req.price?"Asking price is within target":"Price is above target and may need negotiation");

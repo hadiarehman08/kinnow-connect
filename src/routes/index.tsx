@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Sprout, ShoppingBasket, PackageOpen, Sparkles, HandCoins, MessageCircle } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Sprout, ShoppingBasket, PackageOpen, Sparkles, HandCoins, MessageCircle, type LucideIcon } from "lucide-react";
 import { useMarketplace } from "@/lib/marketplace";
 import { Brand, DemoNote, LinkButton, LotCard, PageHeader, RequirementCard } from "@/components/ui";
 
@@ -18,10 +18,10 @@ function Index() {
   const grower=data.role==="grower";
   const ownLots=data.lots.filter(x=>x.grower===data.profile.business);
   const ownReqs=data.requirements.filter(x=>x.buyer===data.profile.business);
-  const stats=grower?[["Active lots",ownLots.filter(x=>x.status==="Active").length,PackageOpen],["New matches",data.requirements.filter(x=>x.status==="Active").length,Sparkles],["Incoming offers",data.offers.filter(x=>x.senderRole==="buyer"&&x.status==="Pending").length,HandCoins],["Unread",data.conversations.filter(x=>x.unread).length,MessageCircle]]:[["Saved lots",data.saved.length,PackageOpen],["Active needs",ownReqs.filter(x=>x.status==="Active").length,Sparkles],["Active offers",data.offers.filter(x=>x.status==="Pending").length,HandCoins],["Unread",data.conversations.filter(x=>x.unread).length,MessageCircle]];
+  const stats: [string,number,LucideIcon][]=grower?[["Active lots",ownLots.filter(x=>x.status==="Active").length,PackageOpen],["New matches",data.requirements.filter(x=>x.status==="Active").length,Sparkles],["Incoming offers",data.offers.filter(x=>x.senderRole==="buyer"&&x.status==="Pending").length,HandCoins],["Unread",data.conversations.filter(x=>x.unread).length,MessageCircle]]:[["Saved lots",data.saved.length,PackageOpen],["Active needs",ownReqs.filter(x=>x.status==="Active").length,Sparkles],["Active offers",data.offers.filter(x=>x.status==="Pending").length,HandCoins],["Unread",data.conversations.filter(x=>x.unread).length,MessageCircle]];
   return <div className="page"><PageHeader eyebrow={`${grower?"Grower":"Buyer"} home`} title={`Good afternoon, ${data.profile.name.split(" ")[0]}`} copy={grower?"Your orchard opportunities, all in one place.":"Fresh opportunities matched to what you source."} action={<LinkButton to={grower?"/lots/new":"/lots"}>{grower?"Post a lot":"Find lots"}</LinkButton>}/><DemoNote/>
     <section className="stat-grid">{stats.map(([label,value,Icon])=><article key={String(label)}><Icon size={20}/><strong>{String(value)}</strong><span>{String(label)}</span></article>)}</section>
-    <section className="dashboard-grid"><div><div className="section-heading"><div><p className="eyebrow">RECOMMENDED</p><h2>{grower?"Buyer needs for your harvest":"Fresh lots for your requirement"}</h2></div><Link to="/matches">See matches <ArrowRight/></Link></div>{grower?<RequirementCard item={data.requirements[0]}/>:<LotCard lot={data.lots[0]}/>}</div>
+    <section className="dashboard-grid"><div><div className="section-heading"><div><p className="eyebrow">RECOMMENDED</p><h2>{grower?"Buyer needs for your harvest":"Fresh lots for your requirement"}</h2></div><Link to="/matches">See matches <ArrowRight/></Link></div>{grower?(data.requirements[0]?<RequirementCard item={data.requirements[0]}/>:null):(data.lots[0]?<LotCard lot={data.lots[0]}/>:null)}</div>
     <aside className="next-steps"><p className="eyebrow">YOUR NEXT STEPS</p><h2>Keep business moving</h2><Link to={grower?"/lots/new":"/requirements/new"}>{grower?"Add your next harvest lot":"Post a sourcing requirement"}<ArrowRight/></Link><Link to="/offers">Review open offers<ArrowRight/></Link><Link to="/messages">Continue conversations<ArrowRight/></Link></aside></section>
   </div>;
 }
