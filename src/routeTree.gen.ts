@@ -10,33 +10,77 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LotsRouteImport } from './routes/lots'
+import { Route as RequirementsRouteImport } from './routes/requirements'
+import { Route as LotsNewRouteImport } from './routes/lots.new'
+import { Route as RequirementsNewRouteImport } from './routes/requirements.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LotsRoute = LotsRouteImport.update({
+  id: '/lots',
+  path: '/lots',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequirementsRoute = RequirementsRouteImport.update({
+  id: '/requirements',
+  path: '/requirements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LotsNewRoute = LotsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => LotsRoute,
+} as any)
+const RequirementsNewRoute = RequirementsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => RequirementsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lots': typeof LotsRouteWithChildren
+  '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/lots': typeof LotsRouteWithChildren
+  '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lots': typeof LotsRouteWithChildren
+  '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/lots' | '/requirements' | '/lots/new' | '/requirements/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/lots' | '/requirements' | '/lots/new' | '/requirements/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/lots'
+    | '/requirements'
+    | '/lots/new'
+    | '/requirements/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LotsRoute: typeof LotsRouteWithChildren
+  RequirementsRoute: typeof RequirementsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +92,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lots': {
+      id: '/lots'
+      path: '/lots'
+      fullPath: '/lots'
+      preLoaderRoute: typeof LotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requirements': {
+      id: '/requirements'
+      path: '/requirements'
+      fullPath: '/requirements'
+      preLoaderRoute: typeof RequirementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lots/new': {
+      id: '/lots/new'
+      path: '/new'
+      fullPath: '/lots/new'
+      preLoaderRoute: typeof LotsNewRouteImport
+      parentRoute: typeof LotsRoute
+    }
+    '/requirements/new': {
+      id: '/requirements/new'
+      path: '/new'
+      fullPath: '/requirements/new'
+      preLoaderRoute: typeof RequirementsNewRouteImport
+      parentRoute: typeof RequirementsRoute
+    }
   }
 }
 
+interface LotsRouteChildren {
+  LotsNewRoute: typeof LotsNewRoute
+}
+
+const LotsRouteChildren: LotsRouteChildren = {
+  LotsNewRoute: LotsNewRoute,
+}
+
+const LotsRouteWithChildren = LotsRoute._addFileChildren(LotsRouteChildren)
+
+interface RequirementsRouteChildren {
+  RequirementsNewRoute: typeof RequirementsNewRoute
+}
+
+const RequirementsRouteChildren: RequirementsRouteChildren = {
+  RequirementsNewRoute: RequirementsNewRoute,
+}
+
+const RequirementsRouteWithChildren = RequirementsRoute._addFileChildren(
+  RequirementsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LotsRoute: LotsRouteWithChildren,
+  RequirementsRoute: RequirementsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
