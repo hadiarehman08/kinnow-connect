@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LotsRouteImport } from './routes/lots'
+import { Route as MatchesRouteImport } from './routes/matches'
 import { Route as RequirementsRouteImport } from './routes/requirements'
+import { Route as LotsIdRouteImport } from './routes/lots.$id'
 import { Route as LotsNewRouteImport } from './routes/lots.new'
+import { Route as RequirementsIdRouteImport } from './routes/requirements.$id'
 import { Route as RequirementsNewRouteImport } from './routes/requirements.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -25,15 +28,30 @@ const LotsRoute = LotsRouteImport.update({
   path: '/lots',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MatchesRoute = MatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RequirementsRoute = RequirementsRouteImport.update({
   id: '/requirements',
   path: '/requirements',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LotsIdRoute = LotsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LotsRoute,
+} as any)
 const LotsNewRoute = LotsNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => LotsRoute,
+} as any)
+const RequirementsIdRoute = RequirementsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => RequirementsRoute,
 } as any)
 const RequirementsNewRoute = RequirementsNewRouteImport.update({
   id: '/new',
@@ -44,42 +62,71 @@ const RequirementsNewRoute = RequirementsNewRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
+  '/matches': typeof MatchesRoute
   '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
+  '/matches': typeof MatchesRoute
   '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
+  '/matches': typeof MatchesRoute
   '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/lots' | '/requirements' | '/lots/new' | '/requirements/new'
+  fullPaths:
+    | '/'
+    | '/lots'
+    | '/matches'
+    | '/requirements'
+    | '/lots/$id'
+    | '/lots/new'
+    | '/requirements/$id'
+    | '/requirements/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/lots' | '/requirements' | '/lots/new' | '/requirements/new'
+  to:
+    | '/'
+    | '/lots'
+    | '/matches'
+    | '/requirements'
+    | '/lots/$id'
+    | '/lots/new'
+    | '/requirements/$id'
+    | '/requirements/new'
   id:
     | '__root__'
     | '/'
     | '/lots'
+    | '/matches'
     | '/requirements'
+    | '/lots/$id'
     | '/lots/new'
+    | '/requirements/$id'
     | '/requirements/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LotsRoute: typeof LotsRouteWithChildren
+  MatchesRoute: typeof MatchesRoute
   RequirementsRoute: typeof RequirementsRouteWithChildren
 }
 
@@ -99,6 +146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LotsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/matches': {
+      id: '/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/requirements': {
       id: '/requirements'
       path: '/requirements'
@@ -106,12 +160,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequirementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lots/$id': {
+      id: '/lots/$id'
+      path: '/$id'
+      fullPath: '/lots/$id'
+      preLoaderRoute: typeof LotsIdRouteImport
+      parentRoute: typeof LotsRoute
+    }
     '/lots/new': {
       id: '/lots/new'
       path: '/new'
       fullPath: '/lots/new'
       preLoaderRoute: typeof LotsNewRouteImport
       parentRoute: typeof LotsRoute
+    }
+    '/requirements/$id': {
+      id: '/requirements/$id'
+      path: '/$id'
+      fullPath: '/requirements/$id'
+      preLoaderRoute: typeof RequirementsIdRouteImport
+      parentRoute: typeof RequirementsRoute
     }
     '/requirements/new': {
       id: '/requirements/new'
@@ -124,20 +192,24 @@ declare module '@tanstack/react-router' {
 }
 
 interface LotsRouteChildren {
+  LotsIdRoute: typeof LotsIdRoute
   LotsNewRoute: typeof LotsNewRoute
 }
 
 const LotsRouteChildren: LotsRouteChildren = {
+  LotsIdRoute: LotsIdRoute,
   LotsNewRoute: LotsNewRoute,
 }
 
 const LotsRouteWithChildren = LotsRoute._addFileChildren(LotsRouteChildren)
 
 interface RequirementsRouteChildren {
+  RequirementsIdRoute: typeof RequirementsIdRoute
   RequirementsNewRoute: typeof RequirementsNewRoute
 }
 
 const RequirementsRouteChildren: RequirementsRouteChildren = {
+  RequirementsIdRoute: RequirementsIdRoute,
   RequirementsNewRoute: RequirementsNewRoute,
 }
 
@@ -148,6 +220,7 @@ const RequirementsRouteWithChildren = RequirementsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LotsRoute: LotsRouteWithChildren,
+  MatchesRoute: MatchesRoute,
   RequirementsRoute: RequirementsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
