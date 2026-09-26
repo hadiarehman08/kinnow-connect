@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Citrus, MapPin, CalendarDays, Scale, Banknote, SearchX } from "lucide-react";
+import { ArrowRight, MapPin, CalendarDays, Scale, Banknote, SearchX } from "lucide-react";
+import logoAsset from "@/assets/kinnowlink-logo.jpg.asset.json";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import type { Lot, Requirement, Status } from "@/lib/marketplace";
 
-export function Brand({compact=false}:{compact?:boolean}){ return <Link to="/" className="brand" aria-label="KinnowLink home"><span className="brand-mark"><Citrus size={compact?20:25}/></span><span>Kinnow<span>Link</span></span></Link> }
+export function Brand({compact=false}:{compact?:boolean}){ return <Link to="/" className="brand" aria-label="KinnowLink home"><span className="brand-mark"><img src={logoAsset.url} alt="" width={compact?20:25} height={compact?20:25}/></span><span>Kinnow<span>Link</span></span></Link> }
 export function DemoNote({children="Changes are saved on this device for this demo."}:{children?:ReactNode}){return <div className="demo-note"><span/> {children}</div>}
 export function StatusBadge({status}:{status:string}){return <span className={`status status-${status.toLowerCase()}`}>{status}</span>}
 export function Button({variant="primary",className="",...props}:ButtonHTMLAttributes<HTMLButtonElement>&{variant?:"primary"|"secondary"|"ghost"|"danger"}){return <button className={`button button-${variant} ${className}`} {...props}/>}
