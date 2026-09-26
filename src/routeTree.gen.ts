@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LotsRouteImport } from './routes/lots'
 import { Route as MatchesRouteImport } from './routes/matches'
+import { Route as MessagesRouteImport } from './routes/messages'
+import { Route as OffersRouteImport } from './routes/offers'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RequirementsRouteImport } from './routes/requirements'
 import { Route as LotsIdRouteImport } from './routes/lots.$id'
 import { Route as LotsNewRouteImport } from './routes/lots.new'
@@ -31,6 +34,21 @@ const LotsRoute = LotsRouteImport.update({
 const MatchesRoute = MatchesRouteImport.update({
   id: '/matches',
   path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequirementsRoute = RequirementsRouteImport.update({
@@ -63,6 +81,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
   '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
   '/requirements': typeof RequirementsRouteWithChildren
   '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
@@ -73,6 +94,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
   '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
   '/requirements': typeof RequirementsRouteWithChildren
   '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
@@ -84,6 +108,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/lots': typeof LotsRouteWithChildren
   '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
   '/requirements': typeof RequirementsRouteWithChildren
   '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
@@ -96,6 +123,9 @@ export interface FileRouteTypes {
     | '/'
     | '/lots'
     | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
     | '/requirements'
     | '/lots/$id'
     | '/lots/new'
@@ -106,6 +136,9 @@ export interface FileRouteTypes {
     | '/'
     | '/lots'
     | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
     | '/requirements'
     | '/lots/$id'
     | '/lots/new'
@@ -116,6 +149,9 @@ export interface FileRouteTypes {
     | '/'
     | '/lots'
     | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
     | '/requirements'
     | '/lots/$id'
     | '/lots/new'
@@ -127,6 +163,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LotsRoute: typeof LotsRouteWithChildren
   MatchesRoute: typeof MatchesRoute
+  MessagesRoute: typeof MessagesRoute
+  OffersRoute: typeof OffersRoute
+  ProfileRoute: typeof ProfileRoute
   RequirementsRoute: typeof RequirementsRouteWithChildren
 }
 
@@ -151,6 +190,27 @@ declare module '@tanstack/react-router' {
       path: '/matches'
       fullPath: '/matches'
       preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/requirements': {
@@ -221,6 +281,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LotsRoute: LotsRouteWithChildren,
   MatchesRoute: MatchesRoute,
+  MessagesRoute: MessagesRoute,
+  OffersRoute: OffersRoute,
+  ProfileRoute: ProfileRoute,
   RequirementsRoute: RequirementsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
