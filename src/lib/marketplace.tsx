@@ -35,6 +35,11 @@ const initial: State = {
     { id:"lot-5", variety:"Kinnow", quantity:11, unit:"tonnes", grade:"A", location:"Vehari, Punjab", date:"2026-12-05", price:112000, description:"Sweet, thin-skinned fruit from young trees. Farm-gate pickup preferred.", grower:"Green Crescent Farms", status:"Active", updated:"Yesterday" },
     { id:"lot-6", variety:"Lemon", quantity:5, unit:"tonnes", grade:"A", location:"Mandi Bahauddin, Punjab", date:"2026-11-12", price:135000, description:"Bright yellow Eureka lemons, sorted and bagged in 20 kg mesh sacks.", grower:"Kazmi Agro", status:"Active", updated:"3 days ago" },
     { id:"lot-7", variety:"Mosambi", quantity:8, unit:"tonnes", grade:"B", location:"Khanewal, Punjab", date:"2026-10-28", price:undefined, description:"Mixed-size sweet lime, suitable for juice stalls and local markets.", grower:"Sadiq Family Orchard", status:"Active", updated:"4 days ago" },
+    { id:"lot-8", variety:"Kinnow", quantity:12, unit:"tonnes", grade:"A", location:"Okara, Punjab", date:"2026-12-10", price:116000, description:"Well-colored fruit from a canal-side orchard, sorted and crate packed.", grower:"Canal View Orchards", status:"Active", updated:"Yesterday" },
+    { id:"lot-9", variety:"Kinnow", quantity:18, unit:"tonnes", grade:"A / Export", location:"Bhalwal, Punjab", date:"2026-12-14", price:118500, description:"Firm 70–90 count kinnow, waxing available, farm-gate loading.", grower:"Shahpur Estates", status:"Active", updated:"Today" },
+    { id:"lot-10", variety:"Kinnow", quantity:10, unit:"tonnes", grade:"B / Juice", location:"Sargodha, Punjab", date:"2026-11-28", price:101000, description:"High-sugar second-picking fruit, ideal for juice processing plants.", grower:"Kot Momin Growers", status:"Active", updated:"2 days ago" },
+    { id:"lot-own-3", variety:"Mosambi", quantity:10, unit:"tonnes", grade:"A", location:"Sargodha, Punjab", date:"2026-10-22", price:94000, description:"Sweet thin-skinned mosambi, field crates ready for dispatch.", grower:"Naz Citrus Farms", status:"Active", updated:"Today" },
+    { id:"lot-own-4", variety:"Lemon", quantity:3, unit:"tonnes", grade:"A", location:"Sargodha, Punjab", date:"2026-11-15", price:132000, description:"Firm Eureka lemons, bagged in 20 kg mesh sacks on request.", grower:"Naz Citrus Farms", status:"Active", updated:"Yesterday" },
   ],
   requirements: [
     { id:"req-1", variety:"Kinnow", quantity:12, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-18", price:120000, description:"Retail-ready fruit; prefer 80–100 count with reusable crate delivery.", buyer:"FreshMart Lahore", status:"Active", updated:"Today" },
@@ -45,6 +50,10 @@ const initial: State = {
     { id:"req-4", variety:"Kinnow", quantity:30, unit:"tonnes", grade:"A / Export", location:"Karachi Port", date:"2026-12-28", price:126000, description:"Gulf-bound shipment. 60–80 count, waxed, export cartons required.", buyer:"Indus Global Traders", status:"Active", updated:"Today" },
     { id:"req-5", variety:"Kinnow", quantity:15, unit:"tonnes", grade:"B / Juice", location:"Faisalabad, Punjab", date:"2026-12-10", price:100000, description:"Juice processing plant; size not important, sugar content preferred.", buyer:"PureSip Juices", status:"Active", updated:"Yesterday" },
     { id:"req-6", variety:"Lemon", quantity:4, unit:"tonnes", grade:"A", location:"Rawalpindi, Punjab", date:"2026-11-18", price:138000, description:"Weekly supermarket supply in 20 kg bags.", buyer:"Metro Greens Mart", status:"Active", updated:"2 days ago" },
+    { id:"req-7", variety:"Kinnow", quantity:16, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-20", price:118000, description:"Retail chain supply; uniform sizing and crate delivery expected.", buyer:"Green Valley Retail", status:"Active", updated:"Yesterday" },
+    { id:"req-8", variety:"Mosambi", quantity:8, unit:"tonnes", grade:"A", location:"Faisalabad, Punjab", date:"2026-10-30", price:98000, description:"Standing weekly order for fruit shops; partial lots accepted.", buyer:"Fruit Basket Retail", status:"Active", updated:"3 days ago" },
+    { id:"req-9", variety:"Lemon", quantity:4, unit:"tonnes", grade:"A", location:"Islamabad, Punjab", date:"2026-11-25", price:140000, description:"Hotel and catering supply; firm, juicy fruit in mesh sacks.", buyer:"Blue Area Grocers", status:"Active", updated:"Today" },
+    { id:"req-own-3", variety:"Kinnow", quantity:15, unit:"tonnes", grade:"B / Juice", location:"Lahore, Punjab", date:"2026-12-08", price:104000, description:"Supply for our juice counter; sugar content matters more than size.", buyer:"Naz Citrus Farms", status:"Active", updated:"Today" },
   ],
   offers: [
     { id:"off-1", lotId:"lot-own", requirementId:"req-1", senderRole:"buyer", party:"FreshMart Lahore", quantity:10, price:116000, note:"Can collect from farm within 48 hours of readiness.", status:"Pending", date:"Today" },
@@ -68,7 +77,7 @@ type ContextValue = State & {
   sendMessage:(id:string,text:string)=>void; markRead:(id:string)=>void; updateProfile:(profile:Profile)=>void; reset:()=>void;
 };
 const MarketplaceContext = createContext<ContextValue | null>(null);
-const STORAGE = "kinnowlink-demo-v1";
+const STORAGE = "kinnowlink-demo-v3";
 const THEME = "kinnowlink-theme";
 
 export function MarketplaceProvider({children}:{children:ReactNode}) {
