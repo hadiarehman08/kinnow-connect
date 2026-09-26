@@ -26,15 +26,15 @@ const initial: State = {
   role: null,
   lots: [
     { id:"lot-1", variety:"Kinnow", quantity:18, unit:"tonnes", grade:"A / Export", location:"Sargodha, Punjab", date:"2026-12-08", price:118000, description:"Even-sized fruit from a mature orchard. Waxing and export packing available on request.", grower:"Noor Citrus Farm", status:"Active", updated:"Today" },
-    { id:"lot-2", variety:"Kinnow", quantity:9, unit:"tonnes", grade:"B / Juice", location:"Bhalwal, Punjab", date:"2026-11-26", description:"Juicy early harvest suitable for wholesale and processing.", grower:"Rehman Orchards", status:"Active", updated:"Yesterday" },
+    { id:"lot-2", variety:"Kinnow", quantity:9, unit:"tonnes", grade:"B / Juice", location:"Bhalwal, Punjab", date:"2026-11-26", price:undefined, description:"Juicy early harvest suitable for wholesale and processing.", grower:"Rehman Orchards", status:"Active", updated:"Yesterday" },
     { id:"lot-3", variety:"Mosambi", quantity:12, unit:"tonnes", grade:"A", location:"Multan, Punjab", date:"2026-10-18", price:96000, description:"Fresh sweet lime, field packed in reusable crates.", grower:"South Grove Produce", status:"Active", updated:"2 days ago" },
     { id:"lot-own", variety:"Kinnow", quantity:14, unit:"tonnes", grade:"A", location:"Sargodha, Punjab", date:"2026-12-12", price:114000, description:"Bright color, good juice content, crate packing available.", grower:"Naz Citrus Farms", status:"Active", updated:"Today" },
-    { id:"lot-draft", variety:"Lemon", quantity:4, unit:"tonnes", grade:"B", location:"Sargodha, Punjab", date:"2026-11-05", description:"Final quantity to be confirmed.", grower:"Naz Citrus Farms", status:"Draft", updated:"3 days ago" },
+    { id:"lot-draft", variety:"Lemon", quantity:4, unit:"tonnes", grade:"B", location:"Sargodha, Punjab", date:"2026-11-05", price:undefined, description:"Final quantity to be confirmed.", grower:"Naz Citrus Farms", status:"Draft", updated:"3 days ago" },
   ],
   requirements: [
     { id:"req-1", variety:"Kinnow", quantity:12, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-18", price:120000, description:"Retail-ready fruit; prefer 80–100 count with reusable crate delivery.", buyer:"FreshMart Lahore", status:"Active", updated:"Today" },
     { id:"req-2", variety:"Kinnow", quantity:24, unit:"tonnes", grade:"A / Export", location:"Karachi Port", date:"2026-12-22", price:125000, description:"Export consignment. Grading and wax treatment required.", buyer:"Seaway Exports", status:"Active", updated:"Yesterday" },
-    { id:"req-3", variety:"Mosambi", quantity:7, unit:"tonnes", grade:"A", location:"Islamabad", date:"2026-10-24", description:"Weekly wholesale supply; partial quantity considered.", buyer:"Capital Fruit Co.", status:"Active", updated:"2 days ago" },
+    { id:"req-3", variety:"Mosambi", quantity:7, unit:"tonnes", grade:"A", location:"Islamabad", date:"2026-10-24", price:undefined, description:"Weekly wholesale supply; partial quantity considered.", buyer:"Capital Fruit Co.", status:"Active", updated:"2 days ago" },
     { id:"req-own", variety:"Kinnow", quantity:10, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-16", price:119000, description:"Consistent sizing for retail stores. Crate delivery preferred.", buyer:"Naz Produce Trading", status:"Active", updated:"Today" },
   ],
   offers: [
