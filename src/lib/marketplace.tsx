@@ -35,7 +35,7 @@ const initial: State = {
     { id:"req-1", variety:"Kinnow", quantity:12, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-18", price:120000, description:"Retail-ready fruit; prefer 80–100 count with reusable crate delivery.", buyer:"FreshMart Lahore", status:"Active", updated:"Today" },
     { id:"req-2", variety:"Kinnow", quantity:24, unit:"tonnes", grade:"A / Export", location:"Karachi Port", date:"2026-12-22", price:125000, description:"Export consignment. Grading and wax treatment required.", buyer:"Seaway Exports", status:"Active", updated:"Yesterday" },
     { id:"req-3", variety:"Mosambi", quantity:7, unit:"tonnes", grade:"A", location:"Islamabad", date:"2026-10-24", price:undefined, description:"Weekly wholesale supply; partial quantity considered.", buyer:"Capital Fruit Co.", status:"Active", updated:"2 days ago" },
-    { id:"req-own", variety:"Kinnow", quantity:10, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-16", price:119000, description:"Consistent sizing for retail stores. Crate delivery preferred.", buyer:"Naz Produce Trading", status:"Active", updated:"Today" },
+    { id:"req-own", variety:"Kinnow", quantity:10, unit:"tonnes", grade:"A", location:"Lahore, Punjab", date:"2026-12-16", price:119000, description:"Consistent sizing for retail stores. Crate delivery preferred.", buyer:"Naz Citrus Farms", status:"Active", updated:"Today" },
   ],
   offers: [
     { id:"off-1", lotId:"lot-own", requirementId:"req-1", senderRole:"buyer", party:"FreshMart Lahore", quantity:10, price:116000, note:"Can collect from farm within 48 hours of readiness.", status:"Pending", date:"Today" },
