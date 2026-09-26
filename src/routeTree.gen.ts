@@ -10,33 +10,183 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LotsRouteImport } from './routes/lots'
+import { Route as MatchesRouteImport } from './routes/matches'
+import { Route as MessagesRouteImport } from './routes/messages'
+import { Route as OffersRouteImport } from './routes/offers'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as RequirementsRouteImport } from './routes/requirements'
+import { Route as LotsIndexRouteImport } from './routes/lots.index'
+import { Route as LotsIdRouteImport } from './routes/lots.$id'
+import { Route as LotsNewRouteImport } from './routes/lots.new'
+import { Route as RequirementsIndexRouteImport } from './routes/requirements.index'
+import { Route as RequirementsIdRouteImport } from './routes/requirements.$id'
+import { Route as RequirementsNewRouteImport } from './routes/requirements.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LotsRoute = LotsRouteImport.update({
+  id: '/lots',
+  path: '/lots',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchesRoute = MatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MessagesRoute = MessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequirementsRoute = RequirementsRouteImport.update({
+  id: '/requirements',
+  path: '/requirements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LotsIndexRoute = LotsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LotsRoute,
+} as any)
+const LotsIdRoute = LotsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => LotsRoute,
+} as any)
+const LotsNewRoute = LotsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => LotsRoute,
+} as any)
+const RequirementsIndexRoute = RequirementsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RequirementsRoute,
+} as any)
+const RequirementsIdRoute = RequirementsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => RequirementsRoute,
+} as any)
+const RequirementsNewRoute = RequirementsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => RequirementsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lots': typeof LotsRouteWithChildren
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
+  '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/$id': typeof LotsIdRoute
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
+  '/requirements/new': typeof RequirementsNewRoute
+  '/lots/': typeof LotsIndexRoute
+  '/requirements/': typeof RequirementsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
+  '/lots/$id': typeof LotsIdRoute
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
+  '/requirements/new': typeof RequirementsNewRoute
+  '/lots': typeof LotsIndexRoute
+  '/requirements': typeof RequirementsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lots': typeof LotsRouteWithChildren
+  '/matches': typeof MatchesRoute
+  '/messages': typeof MessagesRoute
+  '/offers': typeof OffersRoute
+  '/profile': typeof ProfileRoute
+  '/requirements': typeof RequirementsRouteWithChildren
+  '/lots/$id': typeof LotsIdRoute
+  '/lots/new': typeof LotsNewRoute
+  '/requirements/$id': typeof RequirementsIdRoute
+  '/requirements/new': typeof RequirementsNewRoute
+  '/lots/': typeof LotsIndexRoute
+  '/requirements/': typeof RequirementsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/lots'
+    | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
+    | '/requirements'
+    | '/lots/$id'
+    | '/lots/new'
+    | '/requirements/$id'
+    | '/requirements/new'
+    | '/lots/'
+    | '/requirements/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
+    | '/lots/$id'
+    | '/lots/new'
+    | '/requirements/$id'
+    | '/requirements/new'
+    | '/lots'
+    | '/requirements'
+  id:
+    | '__root__'
+    | '/'
+    | '/lots'
+    | '/matches'
+    | '/messages'
+    | '/offers'
+    | '/profile'
+    | '/requirements'
+    | '/lots/$id'
+    | '/lots/new'
+    | '/requirements/$id'
+    | '/requirements/new'
+    | '/lots/'
+    | '/requirements/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LotsRoute: typeof LotsRouteWithChildren
+  MatchesRoute: typeof MatchesRoute
+  MessagesRoute: typeof MessagesRoute
+  OffersRoute: typeof OffersRoute
+  ProfileRoute: typeof ProfileRoute
+  RequirementsRoute: typeof RequirementsRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +198,131 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lots': {
+      id: '/lots'
+      path: '/lots'
+      fullPath: '/lots'
+      preLoaderRoute: typeof LotsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matches': {
+      id: '/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof MatchesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/messages': {
+      id: '/messages'
+      path: '/messages'
+      fullPath: '/messages'
+      preLoaderRoute: typeof MessagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requirements': {
+      id: '/requirements'
+      path: '/requirements'
+      fullPath: '/requirements'
+      preLoaderRoute: typeof RequirementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lots/': {
+      id: '/lots/'
+      path: '/'
+      fullPath: '/lots/'
+      preLoaderRoute: typeof LotsIndexRouteImport
+      parentRoute: typeof LotsRoute
+    }
+    '/lots/$id': {
+      id: '/lots/$id'
+      path: '/$id'
+      fullPath: '/lots/$id'
+      preLoaderRoute: typeof LotsIdRouteImport
+      parentRoute: typeof LotsRoute
+    }
+    '/lots/new': {
+      id: '/lots/new'
+      path: '/new'
+      fullPath: '/lots/new'
+      preLoaderRoute: typeof LotsNewRouteImport
+      parentRoute: typeof LotsRoute
+    }
+    '/requirements/': {
+      id: '/requirements/'
+      path: '/'
+      fullPath: '/requirements/'
+      preLoaderRoute: typeof RequirementsIndexRouteImport
+      parentRoute: typeof RequirementsRoute
+    }
+    '/requirements/$id': {
+      id: '/requirements/$id'
+      path: '/$id'
+      fullPath: '/requirements/$id'
+      preLoaderRoute: typeof RequirementsIdRouteImport
+      parentRoute: typeof RequirementsRoute
+    }
+    '/requirements/new': {
+      id: '/requirements/new'
+      path: '/new'
+      fullPath: '/requirements/new'
+      preLoaderRoute: typeof RequirementsNewRouteImport
+      parentRoute: typeof RequirementsRoute
+    }
   }
 }
 
+interface LotsRouteChildren {
+  LotsIdRoute: typeof LotsIdRoute
+  LotsNewRoute: typeof LotsNewRoute
+  LotsIndexRoute: typeof LotsIndexRoute
+}
+
+const LotsRouteChildren: LotsRouteChildren = {
+  LotsIdRoute: LotsIdRoute,
+  LotsNewRoute: LotsNewRoute,
+  LotsIndexRoute: LotsIndexRoute,
+}
+
+const LotsRouteWithChildren = LotsRoute._addFileChildren(LotsRouteChildren)
+
+interface RequirementsRouteChildren {
+  RequirementsIdRoute: typeof RequirementsIdRoute
+  RequirementsNewRoute: typeof RequirementsNewRoute
+  RequirementsIndexRoute: typeof RequirementsIndexRoute
+}
+
+const RequirementsRouteChildren: RequirementsRouteChildren = {
+  RequirementsIdRoute: RequirementsIdRoute,
+  RequirementsNewRoute: RequirementsNewRoute,
+  RequirementsIndexRoute: RequirementsIndexRoute,
+}
+
+const RequirementsRouteWithChildren = RequirementsRoute._addFileChildren(
+  RequirementsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LotsRoute: LotsRouteWithChildren,
+  MatchesRoute: MatchesRoute,
+  MessagesRoute: MessagesRoute,
+  OffersRoute: OffersRoute,
+  ProfileRoute: ProfileRoute,
+  RequirementsRoute: RequirementsRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

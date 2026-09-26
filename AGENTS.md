@@ -1,10 +1,8 @@
 <!-- LOVABLE:BEGIN -->
 > [!IMPORTANT]
-> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
-> published git history — force pushing, or rebasing/amending/squashing commits
-> that are already pushed — as it rewrites history on Lovable's side and the
-> user will likely lose their project history.
->
-> Commits you push to the connected branch sync back to Lovable and show up in
-> the editor, so keep the branch in a working state.
+> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting published git history.
 <!-- LOVABLE:END -->
+
+- KinnowLink is a self-contained frontend prototype using one typed context with local persistence, because all cross-page demo records must stay synchronized without a backend.
+- Role-aware route components share one application shell, because Grower and Buyer use the same product structure with adapted labels and actions.
+- Theme selection is stored as light, dark, or system and applied on the document root, because every screen must switch consistently without duplicated page implementations.
