@@ -16,8 +16,10 @@ import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as OffersRouteImport } from './routes/offers'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RequirementsRouteImport } from './routes/requirements'
+import { Route as LotsIndexRouteImport } from './routes/lots.index'
 import { Route as LotsIdRouteImport } from './routes/lots.$id'
 import { Route as LotsNewRouteImport } from './routes/lots.new'
+import { Route as RequirementsIndexRouteImport } from './routes/requirements.index'
 import { Route as RequirementsIdRouteImport } from './routes/requirements.$id'
 import { Route as RequirementsNewRouteImport } from './routes/requirements.new'
 
@@ -56,6 +58,11 @@ const RequirementsRoute = RequirementsRouteImport.update({
   path: '/requirements',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LotsIndexRoute = LotsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LotsRoute,
+} as any)
 const LotsIdRoute = LotsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -65,6 +72,11 @@ const LotsNewRoute = LotsNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => LotsRoute,
+} as any)
+const RequirementsIndexRoute = RequirementsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RequirementsRoute,
 } as any)
 const RequirementsIdRoute = RequirementsIdRouteImport.update({
   id: '/$id',
@@ -89,19 +101,21 @@ export interface FileRoutesByFullPath {
   '/lots/new': typeof LotsNewRoute
   '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
+  '/lots/': typeof LotsIndexRoute
+  '/requirements/': typeof RequirementsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/lots': typeof LotsRouteWithChildren
   '/matches': typeof MatchesRoute
   '/messages': typeof MessagesRoute
   '/offers': typeof OffersRoute
   '/profile': typeof ProfileRoute
-  '/requirements': typeof RequirementsRouteWithChildren
   '/lots/$id': typeof LotsIdRoute
   '/lots/new': typeof LotsNewRoute
   '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
+  '/lots': typeof LotsIndexRoute
+  '/requirements': typeof RequirementsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +130,8 @@ export interface FileRoutesById {
   '/lots/new': typeof LotsNewRoute
   '/requirements/$id': typeof RequirementsIdRoute
   '/requirements/new': typeof RequirementsNewRoute
+  '/lots/': typeof LotsIndexRoute
+  '/requirements/': typeof RequirementsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,19 +147,21 @@ export interface FileRouteTypes {
     | '/lots/new'
     | '/requirements/$id'
     | '/requirements/new'
+    | '/lots/'
+    | '/requirements/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/lots'
     | '/matches'
     | '/messages'
     | '/offers'
     | '/profile'
-    | '/requirements'
     | '/lots/$id'
     | '/lots/new'
     | '/requirements/$id'
     | '/requirements/new'
+    | '/lots'
+    | '/requirements'
   id:
     | '__root__'
     | '/'
@@ -157,6 +175,8 @@ export interface FileRouteTypes {
     | '/lots/new'
     | '/requirements/$id'
     | '/requirements/new'
+    | '/lots/'
+    | '/requirements/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -220,6 +240,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequirementsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lots/': {
+      id: '/lots/'
+      path: '/'
+      fullPath: '/lots/'
+      preLoaderRoute: typeof LotsIndexRouteImport
+      parentRoute: typeof LotsRoute
+    }
     '/lots/$id': {
       id: '/lots/$id'
       path: '/$id'
@@ -233,6 +260,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/lots/new'
       preLoaderRoute: typeof LotsNewRouteImport
       parentRoute: typeof LotsRoute
+    }
+    '/requirements/': {
+      id: '/requirements/'
+      path: '/'
+      fullPath: '/requirements/'
+      preLoaderRoute: typeof RequirementsIndexRouteImport
+      parentRoute: typeof RequirementsRoute
     }
     '/requirements/$id': {
       id: '/requirements/$id'
@@ -254,11 +288,13 @@ declare module '@tanstack/react-router' {
 interface LotsRouteChildren {
   LotsIdRoute: typeof LotsIdRoute
   LotsNewRoute: typeof LotsNewRoute
+  LotsIndexRoute: typeof LotsIndexRoute
 }
 
 const LotsRouteChildren: LotsRouteChildren = {
   LotsIdRoute: LotsIdRoute,
   LotsNewRoute: LotsNewRoute,
+  LotsIndexRoute: LotsIndexRoute,
 }
 
 const LotsRouteWithChildren = LotsRoute._addFileChildren(LotsRouteChildren)
@@ -266,11 +302,13 @@ const LotsRouteWithChildren = LotsRoute._addFileChildren(LotsRouteChildren)
 interface RequirementsRouteChildren {
   RequirementsIdRoute: typeof RequirementsIdRoute
   RequirementsNewRoute: typeof RequirementsNewRoute
+  RequirementsIndexRoute: typeof RequirementsIndexRoute
 }
 
 const RequirementsRouteChildren: RequirementsRouteChildren = {
   RequirementsIdRoute: RequirementsIdRoute,
   RequirementsNewRoute: RequirementsNewRoute,
+  RequirementsIndexRoute: RequirementsIndexRoute,
 }
 
 const RequirementsRouteWithChildren = RequirementsRoute._addFileChildren(
